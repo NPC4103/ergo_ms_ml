@@ -1,0 +1,9 @@
+{
+  "menuSections": [
+    {
+      "icon": "Brain",
+      "routeName": "ML",
+      "title": "ML"
+    }
+  ]
+}
