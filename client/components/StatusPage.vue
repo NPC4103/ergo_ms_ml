@@ -319,11 +319,25 @@
         <!-- Integration hint -->
         <div class="mt-integration-hint">
             <Info :size="14" class="flex-shrink-0" />
-            <span>
-                Все метрики — демонстрационные заглушки. Для подключения реальных данных замените
-                <code>_demo_metrics()</code> в <code>api/views.py</code> на запросы
-                к вашей системе мониторинга (Prometheus, внутренний API и т.п.).
-            </span>
+            <div>
+                <p class="mb-1">
+                    Все метрики на этой странице — демонстрационные заглушки. Для подключения реальных данных:
+                </p>
+                <ul class="mt-1 mb-0 ps-3 small">
+                    <li>
+                        Замените логику в <code>_demo_metrics()</code> в <code>api/views.py</code> на запросы
+                        к вашей системе мониторинга (Prometheus, внутренний API и т.п.).
+                    </li>
+                    <li>
+                        Добавьте новые поля в объект, который возвращает метод <code>health</code>, и сохраните их в
+                        <code>useModuleTemplateStatus</code> (история <code>history</code>).
+                    </li>
+                    <li>
+                        Отобразите метрики на <code>StatusPage.vue</code> в виде карточек, графиков или в журнале
+                        измерений. Подробный пример см. в <code>HOWTO.md</code>.
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div v-if="loading" class="mt-loading-overlay">

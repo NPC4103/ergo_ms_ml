@@ -1,159 +1,214 @@
-# Module Template
+# Module Template (module_template)
 
-Шаблонный модуль для системы ERGO MS. Используйте его как отправную точку при создании новых модулей.
+Учебный модуль для системы ERGO MS. Показывает, как в одном месте собрать:
 
-## Структура модуля
+- health‑check и мониторинг сервиса,
+- простую rule‑based «ML‑модель»,
+- типовой CRUD‑API и Vue‑интерфейс.
 
-```
-module_template/
-├── api/
-│   ├── __init__.py
-│   ├── apps.py               # AppConfig: name, label, verbose_name
-│   ├── config.py             # Константы модуля (DB alias, версия, USE_GPU)
-│   ├── models.py             # Модель TemplateItem
-│   ├── serializers.py        # TemplateItemSerializer
-│   ├── views.py              # TemplateItemViewSet, HealthViewSet
-│   ├── urls.py               # URL маршруты (namespace = module_template)
-│   ├── admin.py              # Регистрация TemplateItem в Django admin
-│   ├── routers.py            # DB router для изолированного подключения
+Модуль задуман как отправная точка для студенческих и исследовательских модулей СКБ.
+
+---
+
+## 1. Структура модуля
+
+```text
+modules/module_template/
+├── api/                       # Серверная часть (Django + DRF)
+│   ├── apps.py                # AppConfig модуля
+│   ├── config.py              # Константы (MODULE_DATABASE_ALIAS, VERSION, USE_GPU)
+│   ├── models.py              # Модель TemplateItem (пример CRUD-сущности)
+│   ├── serializers.py         # TemplateItemSerializer
+│   ├── views.py               # TemplateItemViewSet, HealthViewSet, ML endpoints
+│   ├── ml_service.py          # Rule-based модель для текста (demo)
+│   ├── routers.py             # Маршрутизация БД (по умолчанию alias `default`)
+│   ├── urls.py                # URL-маршруты модуля
 │   └── migrations/
-├── client/
+├── client/                    # Клиентская часть (Vue)
 │   ├── js/
-│   │   ├── routes.js         # Маршруты Vue Router
-│   │   ├── menu-config.json  # Конфигурация меню
-│   │   ├── endpoints.js      # API эндпоинты
-│   │   └── useModuleTemplate.js  # Composable: логика health-check
+│   │   ├── routes.js          # Маршруты Vue Router
+│   │   ├── menu-config.json   # Пункты меню в ядре
+│   │   ├── endpoints.js       # Эндпоинты API модуля
+│   │   ├── useModuleTemplate.js   # Health‑check и метрики
+│   │   └── useModuleTemplateML.js # Работа с ML‑эндпоинтами
 │   ├── components/
-│   │   ├── MainPage.vue      # Главная страница модуля
-│   │   └── StatusPage.vue    # Страница статуса сервиса
+│   │   ├── MainPage.vue       # Главный экран модуля СКБ
+│   │   └── StatusPage.vue     # Дашборд статуса сервиса
 │   ├── scss/
-│   │   ├── main-page.scss    # Стили MainPage
-│   │   └── status-page.scss  # Стили StatusPage
-│   ├── assets/
-│   │   ├── svg/              # SVG-иконки модуля
-│   │   ├── images/           # Изображения модуля
-│   │   └── styles/           # Дополнительные стили (опционально)
-│   └── ParentLayout.vue      # Лейаут модуля
-├── ergoms.conf               # Команды ergoms модуля
-├── .gitignore
+│   │   ├── main-page.scss     # Стили главной страницы
+│   │   └── status-page.scss   # Стили страницы статуса
+│   └── assets/
+│       └── svg/
+│           └── sdb.svg        # Эмблема «Студенческого конструкторского бюро»
+├── ergoms.conf                # Команды ergoms для модуля
 └── README.md
 ```
 
-## API Endpoints
+Краткое описание ключевых элементов:
 
-### GET /api/module_template/health/health/
+- `HealthViewSet` в `api/views.py` — возвращает агрегированный статус сервиса, БД и демо‑метрики, всегда с кодом `200 OK`, а реальное состояние — в JSON.
+- `ml_service.py` — rule‑based классификатор текста: категория, приоритет, балл важности и сработавшие ключевые слова.
+- `MainPage.vue` — академичный обзор модуля + интерактивное ML‑демо.
+- `StatusPage.vue` — учебный пример мониторинга: метрики, графики, журнал измерений.
 
-Проверка здоровья сервиса и базы данных.
+---
 
-**Ответ (200 OK):**
+## 2. Как запустить и посмотреть модуль
+
+Все операции выполняются только через `ergoms`.
+
+### Применить миграции модуля
+
+```bash
+ergoms module_template:migrate
+```
+
+### Запустить backend и клиент (общие команды проекта)
+
+```bash
+# Django API (dev)
+ergoms dev
+
+# Клиент (Vue dev)
+ergoms start-client
+```
+
+После запуска:
+
+1. Откройте главную страницу модуля (пункт меню «Шаблон модуля» / `ModuleTemplateMain`).
+2. Протестируйте ML‑демо: выберите один из быстрых примеров текста или введите свой и нажмите «Классифицировать».
+3. Перейдите по кнопке «Мониторинг сервиса» на `StatusPage.vue` и посмотрите на демо‑метрики и графики.
+
+---
+
+## 3. Основные API‑эндпоинты
+
+### Health‑check и метрики
+
+`GET /api/module_template/health/health/`
+
+Ответ всегда `200 OK`, статус кодируется в теле:
+
 ```json
 {
   "status": "ok",
   "db": "ok",
-  "time": "2026-01-29T10:00:00Z",
-  "app_version": "dev"
+  "time": "2026-03-16T12:00:00Z",
+  "app_version": "dev",
+  "latency_ms": 42.1,
+  "requests_per_minute": 23.5,
+  "error_rate": 0.7,
+  "uptime_seconds": 12345,
+  "environment": "development",
+  "node_name": "node-1"
 }
 ```
 
-**Ответ (503 Service Unavailable):**
+Эти данные визуализируются на `StatusPage.vue` (карточки статуса, графики, журнал измерений).
+
+### ML‑модель (demo)
+
+- `GET /api/module_template/health/model-meta/` — мета‑информация о модели (тип, версия, поддерживаемые категории, подсказка по замене).
+- `POST /api/module_template/health/predict/` — классификация текста:
+
 ```json
 {
-  "status": "fail",
-  "db": "fail",
-  "time": "2026-01-29T10:00:00Z",
-  "app_version": "dev"
+  "text": "Критическая ошибка в production..."
 }
 ```
 
-### /api/module_template/items/
+Ответ содержит `category`, `priority`, `score`, `matched_keywords`, длину текста и число предложений. Эти данные отображаются на `MainPage.vue`.
 
-CRUD-эндпоинты для модели `TemplateItem` (DRF ModelViewSet).
+### CRUD по TemplateItem
 
-Поддерживает фильтрацию через query param `?active=true|false`.
+Базовый пример CRUD через DRF `ModelViewSet`:
 
-## Клиентские маршруты
+- `GET /api/module_template/items/`
+- `POST /api/module_template/items/`
+- `GET /api/module_template/items/{id}/` и т.д.
 
-| Путь | Название | Описание |
-|------|----------|----------|
-| `/module-template` | ModuleTemplate | Редирект на статус |
-| `/module-template` (index) | ModuleTemplateMain | Главная страница |
-| `/module-template/status` | ModuleTemplateStatus | Страница статуса сервиса |
+Поддерживается фильтрация по признаку активности:
 
-## Команды ergoms
-
-```bash
-# Применить миграции модуля
-ergoms module_template:migrate
+```text
+/api/module_template/items/?active=true
 ```
 
-## Установка и запуск
+---
 
-Модуль автоматически обнаруживается системой ERGO MS при наличии файла `api/apps.py` с классом `AppConfig`.
+## 4. Клиентские маршруты
 
-Применить миграции:
+| Путь                        | Роут                | Описание                       |
+|-----------------------------|---------------------|--------------------------------|
+| `/module-template`         | `ModuleTemplateMain` | Главная страница модуля       |
+| `/module-template/status`  | `ModuleTemplateStatus` | Дашборд статуса и метрик   |
 
-```bash
-ergoms module_template:migrate
-```
+Навигация и пункты меню модуля описаны в `client/js/routes.js` и `client/js/menu-config.json` и автоматически подхватываются ядром.
 
-## Архитектура клиентской части
+---
 
-### Composable
+## 5. Архитектура client‑части
 
-Логика запросов к API вынесена в `client/js/useModuleTemplate.js`:
+### Composables
 
-```javascript
-import { useModuleTemplateStatus } from '../js/useModuleTemplate'
+- `useModuleTemplateStatus` (`client/js/useModuleTemplate.js`) — обращается к `health`‑эндпоинту, ведёт историю измерений, вычисляет уровни `ok/warn/crit`.
+- `useModuleTemplateML` (`client/js/useModuleTemplateML.js`) — работает с `model-meta` и `predict`, обрезает слишком длинные тексты и отдаёт данные в `MainPage.vue`.
 
-const { loading, statusData, refreshStatus, formatTime } = useModuleTemplateStatus()
-```
+### Стили и тема
 
-### Стили
-
-Стили компонентов вынесены в отдельные SCSS-файлы в `client/scss/`:
+Стили главной и статус‑страницы вынесены в SCSS‑файлы и используют только Bootstrap‑переменные (`--bs-*`), чтобы модуль выглядел единым с ядром:
 
 ```vue
 <style lang="scss" scoped>
-@use '../scss/main-page.scss';
+@import '../scss/main-page.scss';
 </style>
 ```
 
-### Эндпоинты
+Аналогично для `status-page.scss`.
 
-```javascript
-import { moduleTemplateEndpoints } from '../js/endpoints'
-// moduleTemplateEndpoints.moduleTemplate.health
-// moduleTemplateEndpoints.moduleTemplate.models.list
-// moduleTemplateEndpoints.moduleTemplate.models.detail(id)
-```
+---
 
-## Соглашения об импортах
+## 6. Где смотреть how‑to сценарии
+
+Для практических сценариев см. файл `HOWTO.md` в корне модуля. В нём разобраны:
+
+- как заменить rule‑based модель на свою ML‑модель;
+- как добавить новую метрику в health‑check и вывести её на `StatusPage.vue`;
+- как добавить новую страницу/карточку на клиенте.
+
+---
+
+## 7. Соглашения об импортах
 
 **API (Python):**
-- Внутри модуля: относительные импорты (`from .models import TemplateItem`)
-- Из ядра: полные пути (`from src.core...`)
+
+- внутри модуля — относительные импорты (`from .models import TemplateItem`);
+- из ядра — полные пути (`from src.core...`).
 
 **Client (JavaScript/Vue):**
-- Из ядра: абсолютные пути (`import { apiClient } from '@/js/api/manager'`)
-- Внутри модуля: относительные пути (`import { moduleTemplateEndpoints } from '../js/endpoints'`)
 
-## Расширение модуля
+- из ядра — абсолютные пути (`import { apiClient } from '@/js/api/manager'`);
+- внутри модуля — относительные пути (`import { moduleTemplateEndpoints } from '../js/endpoints'`).
 
-### Добавление новых страниц
+---
 
-1. Создай компонент в `client/components/`
-2. Добавь маршрут в `client/js/routes.js`
-3. При необходимости обнови `client/js/menu-config.json`
-4. Создай SCSS-файл в `client/scss/`
+## 8. Как расширять модуль
 
-### Добавление API endpoints
+### Новые страницы на клиенте
 
-1. Создай ViewSet в `api/views.py`
-2. Зарегистрируй в роутере в `api/urls.py`
-3. Добавь эндпоинт в `client/js/endpoints.js`
+1. Создайте компонент в `client/components/`.
+2. Добавьте маршрут в `client/js/routes.js`.
+3. При необходимости добавьте пункт в меню в `client/js/menu-config.json`.
+4. Вынесите стили в новый SCSS‑файл в `client/scss/`.
 
-### Добавление Celery задач
+### Новые API‑эндпоинты
 
-1. Создай `api/tasks.py` с задачами
-2. Создай `api/celery_config.py` с конфигурацией очередей
-3. При необходимости создай `api/celery_beat_config.py` для периодических задач
+1. Добавьте `ViewSet` или `APIView` в `api/views.py`.
+2. Зарегистрируйте его в `api/urls.py`.
+3. Опишите эндпоинт в `client/js/endpoints.js` и используйте его из composable или компонента.
+
+### Celery‑задачи (опционально)
+
+1. Создайте `api/tasks.py` с задачами.
+2. Опишите очереди в `api/celery_config.py` и, при необходимости, периодические задания в `api/celery_beat_config.py`.
+
+Более детальные примеры см. в `HOWTO.md`.

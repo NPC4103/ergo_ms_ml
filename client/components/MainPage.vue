@@ -235,6 +235,37 @@
                     </div>
                 </div>
 
+                <!-- ───── How-to блок ───── -->
+                <div class="mt-howto mt-4">
+                    <h3 class="section-heading mb-2">
+                        <Lightbulb :size="18" class="section-icon" />
+                        Как развивать этот модуль дальше
+                    </h3>
+                    <ul class="mt-howto-list">
+                        <li class="mt-howto-item">
+                            <span class="mt-howto-title">Подключите свою ML‑модель</span>
+                            <span class="mt-howto-desc">
+                                Замените rule‑based логику в <code>api/ml_service.py</code> на вызов обученной модели,
+                                сохранив структуру ответа. Подробнее см. <code>HOWTO.md</code>.
+                            </span>
+                        </li>
+                        <li class="mt-howto-item">
+                            <span class="mt-howto-title">Добавьте реальные метрики мониторинга</span>
+                            <span class="mt-howto-desc">
+                                Расширьте <code>_demo_metrics()</code> в <code>api/views.py</code> и выведите новые поля
+                                на <code>StatusPage.vue</code> через <code>useModuleTemplateStatus</code>.
+                            </span>
+                        </li>
+                        <li class="mt-howto-item">
+                            <span class="mt-howto-title">Создайте свою учебную страницу</span>
+                            <span class="mt-howto-desc">
+                                Добавьте компонент в <code>client/components</code>, маршрут в
+                                <code>client/js/routes.js</code> и пункт меню в <code>menu-config.json</code>.
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
