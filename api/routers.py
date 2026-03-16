@@ -2,17 +2,16 @@ from typing import Optional
 
 
 class AppLabelRouter:
-    
-    route_app_labels = {'ml'}
-    
+    route_app_labels = {'module_template'}
+
     def db_for_read(self, model, **hints):
         if model._meta.app_label in self.route_app_labels:
-            return 'ml'
+            return 'module_template'
         return None
 
     def db_for_write(self, model, **hints):
         if model._meta.app_label in self.route_app_labels:
-            return 'ml'
+            return 'module_template'
         return None
 
     def allow_relation(self, obj1, obj2, **hints):
@@ -25,6 +24,6 @@ class AppLabelRouter:
     
     def allow_migrate(self, db, app_label, model_name=None, **hints):
         if app_label in self.route_app_labels:
-            return db == 'ml'
+            return db == 'module_template'
         else:
-            return db != 'ml'
+            return db != 'module_template'

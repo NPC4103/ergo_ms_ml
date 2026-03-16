@@ -1,0 +1,36 @@
+.mt-status-page {
+  padding: 20px;
+  position: relative;
+}
+
+.status-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.mt-loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+code {
+  background: var(--bs-gray-100);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.875em;
+}

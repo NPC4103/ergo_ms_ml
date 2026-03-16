@@ -2,8 +2,8 @@
   "menuSections": [
     {
       "icon": "Brain",
-      "routeName": "ML",
-      "title": "ML"
+      "routeName": "ModuleTemplateMain",
+      "title": "Module Template"
     }
   ]
 }

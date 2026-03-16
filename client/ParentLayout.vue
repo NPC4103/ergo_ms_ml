@@ -1,5 +1,5 @@
 <template>
-    <div class="ml">
+    <div class="module-template-layout">
         <router-view :key="$route.name" />
     </div>
 </template>
@@ -8,7 +8,7 @@
 </script>
 
 <style scoped>
-.ml {
+.module-template-layout {
     min-height: 100%;
 }
 </style>

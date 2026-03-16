@@ -1,9 +1,9 @@
-export const mlEndpoints = {
-    ml: {
-        health: 'ml/health/',
-        models: {
-            list: 'ml/models/',
-            detail: (id) => `ml/models/${id}/`,
-        }
-    }
+export const moduleTemplateEndpoints = {
+  moduleTemplate: {
+    health: 'module_template/health/',
+    models: {
+      list: 'module_template/models/',
+      detail: (id) => `module_template/models/${id}/`,
+    },
+  },
 }

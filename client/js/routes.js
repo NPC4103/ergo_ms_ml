@@ -1,26 +1,26 @@
 export default {
-  ML: {
-    path: '/ml',
-    name: 'MLMain',
-    redirect: { name: 'MLMain' },
-    component: '@/modules/ml/client/ParentLayout.vue',
+  ModuleTemplate: {
+    path: '/module-template',
+    name: 'ModuleTemplateMain',
+    redirect: { name: 'ModuleTemplateStatus' },
+    component: '@/modules/module_template/client/ParentLayout.vue',
     meta: {
-      title: 'ML',
+      title: 'Module Template',
       requiresAuth: true,
     },
     children: [
       {
         path: '',
-        name: 'MLMain',
-        component: '@/modules/ml/client/components/MainPage.vue',
+        name: 'ModuleTemplateMain',
+        component: '@/modules/module_template/client/components/MainPage.vue',
         meta: {
           title: 'Главная',
         },
       },
       {
         path: 'status',
-        name: 'MLStatus',
-        component: '@/modules/ml/client/components/StatusPage.vue',
+        name: 'ModuleTemplateStatus',
+        component: '@/modules/module_template/client/components/StatusPage.vue',
         meta: {
           title: 'Статус сервиса',
         },
