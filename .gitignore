@@ -1,0 +1,59 @@
+# --- Общие ---
+*.log
+*.tmp
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# --- Python / Django API ---
+api/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+ENV/
+
+# Локальные настройки и секреты
+*.env
+.env.*
+!example.env
+!env.example
+
+# Бэкапы БД и артефакты
+*.sqlite3
+*.db
+*.bak
+*.backup
+
+# Coverage / отчёты
+.coverage
+coverage.xml
+htmlcov/
+
+# --- Node / Vue client ---
+node_modules/
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
+
+dist/
+build/
+.cache/
+.vite/
+
+# Сборки/артефакты фронта
+*.local.js
+*.local.cjs
+
+# --- IDE / редакторы ---
+.idea/
+.vscode/
+*.iml
+.history/

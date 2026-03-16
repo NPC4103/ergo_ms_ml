@@ -1,7 +1,0 @@
-{
-  "name": "@ergo-ms/ml-client",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "description": "ML модуль - клиентская часть"
-}

@@ -1,0 +1,632 @@
+.mt-main-page {
+  padding: 24px;
+  min-height: 100%;
+}
+
+// ─── Основная карточка ────────────────────────────────────────────────────────
+.main-card {
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+// ─── Шапка ────────────────────────────────────────────────────────────────────
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--bs-border-color);
+  background: var(--bs-tertiary-bg);
+  gap: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.module-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.module-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--bs-heading-color);
+  letter-spacing: -0.01em;
+}
+
+.module-subtitle {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--bs-secondary-color);
+  line-height: 1.4;
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--bs-secondary-bg);
+  color: var(--bs-secondary-color);
+  border: 1px solid var(--bs-border-color);
+  letter-spacing: 0.02em;
+
+  &--accent {
+    background: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary);
+    border-color: rgba(var(--bs-primary-rgb), 0.25);
+  }
+}
+
+// ─── Контент ──────────────────────────────────────────────────────────────────
+.card-content {
+  padding: 32px 32px 28px;
+}
+
+// ─── Заголовок секции ─────────────────────────────────────────────────────────
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--bs-heading-color);
+  margin-bottom: 10px;
+}
+
+.section-icon {
+  color: var(--bs-primary);
+  flex-shrink: 0;
+}
+
+// ─── Приветствие ──────────────────────────────────────────────────────────────
+.welcome-section {
+  margin-bottom: 28px;
+}
+
+.welcome-description {
+  color: var(--bs-secondary-color);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: 680px;
+  margin-bottom: 0;
+}
+
+// ─── Сетка фич ───────────────────────────────────────────────────────────────
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 14px 12px;
+  background: var(--bs-tertiary-bg);
+  border-radius: 10px;
+  border: 1px solid var(--bs-border-color);
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+
+  &:hover {
+    border-color: var(--bs-primary);
+    box-shadow: 0 4px 16px rgba(var(--bs-primary-rgb), 0.12);
+    transform: translateY(-2px);
+  }
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.feature-icon--monitoring {
+  background: rgba(var(--bs-danger-rgb), 0.07);
+  color: var(--bs-danger);
+}
+
+.feature-icon--db {
+  background: rgba(var(--bs-info-rgb), 0.07);
+  color: var(--bs-info);
+}
+
+.feature-icon--api {
+  background: rgba(var(--bs-primary-rgb), 0.07);
+  color: var(--bs-primary);
+}
+
+.feature-icon--frontend {
+  background: rgba(var(--bs-warning-rgb), 0.09);
+  color: var(--bs-warning-text-emphasis);
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.feature-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.feature-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--bs-heading-color);
+}
+
+.feature-tag {
+  font-size: 0.67rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.feature-desc {
+  font-size: 0.8rem;
+  color: var(--bs-secondary-color);
+  line-height: 1.45;
+}
+
+// ─── Кнопка перехода ──────────────────────────────────────────────────────────
+.action-section {
+  padding-top: 16px;
+  border-top: 1px solid var(--bs-border-color);
+  margin-bottom: 0;
+}
+
+// ─── ML-демо ─────────────────────────────────────────────────────────────────
+.ml-demo {
+  padding-top: 28px;
+  margin-top: 28px;
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.ml-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.ml-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ml-badge {
+  align-self: flex-start;
+  white-space: nowrap;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
+  border: 1px solid rgba(var(--bs-primary-rgb), 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+// ─── ML-карточки ─────────────────────────────────────────────────────────────
+.ml-card {
+  background: var(--bs-tertiary-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 10px;
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ml-card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bs-secondary-color);
+  margin-bottom: 14px;
+}
+
+.char-counter {
+  text-align: right;
+  font-size: 0.72rem;
+  color: var(--bs-secondary-color);
+  margin-top: 3px;
+}
+
+.ml-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.ml-examples-label {
+  font-size: 0.78rem;
+  color: var(--bs-secondary-color);
+}
+
+.ml-example-chip {
+  font-size: 0.72rem;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+// ─── Метаданные модели ────────────────────────────────────────────────────────
+.model-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.model-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+}
+
+.model-meta-key {
+  color: var(--bs-secondary-color);
+}
+
+.model-meta-val {
+  font-weight: 600;
+  color: var(--bs-body-color);
+}
+
+// ─── Пустое состояние ─────────────────────────────────────────────────────────
+.ml-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 32px 16px;
+  color: var(--bs-secondary-color);
+
+  p {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+}
+
+.ml-empty-icon {
+  opacity: 0.25;
+}
+
+// ─── Скелетон ────────────────────────────────────────────────────────────────
+.ml-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--bs-secondary-bg) 25%,
+    var(--bs-tertiary-bg) 50%,
+    var(--bs-secondary-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// ─── Результат классификации ──────────────────────────────────────────────────
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+  margin-bottom: 14px;
+}
+
+.result-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &--full {
+    grid-column: 1 / -1;
+  }
+}
+
+.result-key {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bs-secondary-color);
+}
+
+.result-val {
+  font-size: 0.88rem;
+  color: var(--bs-body-color);
+  font-weight: 500;
+}
+
+.result-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  width: fit-content;
+}
+
+// Категории
+.badge-cat--error    { background: rgba(var(--bs-danger-rgb), 0.12); color: var(--bs-danger); }
+.badge-cat--urgent   { background: rgba(var(--bs-warning-rgb), 0.14); color: var(--bs-warning-text-emphasis); }
+.badge-cat--request  { background: rgba(var(--bs-primary-rgb), 0.1); color: var(--bs-primary); }
+.badge-cat--report   { background: rgba(var(--bs-info-rgb), 0.1); color: var(--bs-info); }
+.badge-cat--task     { background: rgba(var(--bs-success-rgb), 0.1); color: var(--bs-success); }
+.badge-cat--other    { background: var(--bs-secondary-bg); color: var(--bs-secondary-color); }
+
+// Приоритеты
+.badge-pri--high   { background: rgba(var(--bs-danger-rgb), 0.12); color: var(--bs-danger); }
+.badge-pri--medium { background: rgba(var(--bs-warning-rgb), 0.14); color: var(--bs-warning-text-emphasis); }
+.badge-pri--low    { background: rgba(var(--bs-success-rgb), 0.1); color: var(--bs-success); }
+
+// Балл
+.result-score-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-score-num {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bs-primary);
+  min-width: 36px;
+}
+
+.score-bar-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bs-secondary-bg);
+  overflow: hidden;
+}
+
+.score-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--bs-primary);
+  transition: width 0.4s ease;
+}
+
+// Ключевые слова
+.result-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.kw-chip {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
+  border: 1px solid rgba(var(--bs-primary-rgb), 0.2);
+}
+
+// ─── Сырой JSON ───────────────────────────────────────────────────────────────
+.raw-json-details {
+  margin-top: 10px;
+  border-top: 1px solid var(--bs-border-color);
+  padding-top: 8px;
+
+  summary {
+    font-size: 0.75rem;
+    color: var(--bs-secondary-color);
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      color: var(--bs-body-color);
+    }
+  }
+}
+
+.raw-json {
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  background: var(--bs-secondary-bg);
+  border-radius: 6px;
+  border: 1px solid var(--bs-border-color);
+  overflow-x: auto;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+// ─── Подсказка студентам ─────────────────────────────────────────────────────
+.ml-hint {
+  margin-top: 14px;
+  padding-top: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--bs-secondary-color);
+  border-top: 1px dashed var(--bs-border-color);
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--bs-warning-text-emphasis);
+  }
+}
+
+// ─── How-to блок ──────────────────────────────────────────────────────────────
+.mt-howto {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.mt-howto-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mt-howto-item {
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--bs-border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.mt-howto-title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--bs-heading-color);
+  margin-bottom: 2px;
+}
+
+.mt-howto-desc {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--bs-secondary-color);
+
+  code {
+    font-size: 0.78rem;
+    background: var(--bs-secondary-bg);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+}
+
+// ─── Спиннер иконки ───────────────────────────────────────────────────────────
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ─── Адаптивность ─────────────────────────────────────────────────────────────
+@media (max-width: 767.98px) {
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 18px;
+  }
+
+  .header-meta {
+    margin-top: 4px;
+  }
+
+  .module-logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-item--full {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .mt-main-page {
+    padding: 12px;
+  }
+
+  .card-content {
+    padding: 20px 16px 18px;
+  }
+
+  .ml-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ml-badge {
+    align-self: flex-start;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
