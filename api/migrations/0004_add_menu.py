@@ -12,7 +12,7 @@ def add_menu(apps, schema_editor):
     helper = MenuMigrationHelper(apps, 'modules/module_template')
     helper.clear_module_items()
 
-    root = helper.create_group('Module Template', 'ModuleTemplateMain', icon='Brain')
+    root = helper.create_group('Шаблон модуля', 'ModuleTemplateMain', icon='Brain')
     helper.create_routes_batch([
         ('Главная', 'ModuleTemplateMain'),
         ('Статус сервиса', 'ModuleTemplateStatus'),
@@ -30,7 +30,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('module_template', '0003_templateitem'),
-        ('cms_adp', '0016_alter_menuitem_item_type'),
     ]
 
     operations = [

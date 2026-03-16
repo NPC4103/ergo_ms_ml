@@ -1,3 +1,3 @@
-MODULE_DATABASE_ALIAS = 'module_template'
+MODULE_DATABASE_ALIAS = 'default'
 MODULE_VERSION = '1.0.0'
 USE_GPU = False

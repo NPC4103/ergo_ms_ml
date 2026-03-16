@@ -1,9 +1,9 @@
 export const moduleTemplateEndpoints = {
   moduleTemplate: {
     health: 'module_template/health/',
-    models: {
-      list: 'module_template/models/',
-      detail: (id) => `module_template/models/${id}/`,
+    ml: {
+      meta: 'module_template/model-meta/',
+      predict: 'module_template/predict/',
     },
   },
 }
